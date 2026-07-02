@@ -47,10 +47,16 @@ export async function createRefreshToken(userId: number): Promise<string> {
     .sign(encodedKey);
 }
 
-export async function verifyToken(token: string): Promise<JWTPayload | null> {
+export interface AppJWTPayload extends JWTPayload {
+  userId: number;
+  type: string;
+  role?: string;
+}
+
+export async function verifyToken(token: string): Promise<AppJWTPayload | null> {
   try {
     const { payload } = await jwtVerify(token, encodedKey);
-    return payload;
+    return payload as AppJWTPayload;
   } catch (error) {
     return null;
   }
