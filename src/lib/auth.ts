@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT, jwtVerify, JWTPayload } from 'jose';
 import { NextRequest } from 'next/server';
 
 export function getTokenFromRequest(request: NextRequest | Request): string | undefined {
